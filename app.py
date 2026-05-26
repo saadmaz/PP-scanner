@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, request, jsonify, send_from_directory, Response
 from flask_cors import CORS
 import cv2
 import pytesseract
@@ -71,6 +71,10 @@ def process_passport_image(image_path):
         
     except Exception as e:
         return {"error": f"Internal extraction error: {str(e)}"}
+
+@app.route('/favicon.ico')
+def favicon():
+    return Response(status=204)
 
 @app.route('/')
 def serve_index():

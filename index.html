@@ -149,7 +149,7 @@
 
         .form-grid {
             display: grid;
-            grid-template-columns: 1s;
+            grid-template-columns: 1fr;
             gap: 20px;
         }
 
@@ -281,7 +281,7 @@
             errorBox.style.display = 'none';
 
             try {
-                const networkResponse = await fetch('/api/scan', {
+                const networkResponse = await fetch('http://localhost:5000/api/scan', {
                     method: 'POST',
                     body: payload
                 });
