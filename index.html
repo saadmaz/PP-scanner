@@ -281,7 +281,8 @@
             errorBox.style.display = 'none';
 
             try {
-                const networkResponse = await fetch('http://localhost:5000/api/scan', {
+                const BACKEND_URL = 'https://YOUR-APP-NAME.onrender.com';
+                const networkResponse = await fetch(`${BACKEND_URL}/api/scan`, {
                     method: 'POST',
                     body: payload
                 });

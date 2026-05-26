@@ -1,12 +1,13 @@
 import os
+import platform
 from flask import Flask, request, jsonify, send_from_directory, Response
 from flask_cors import CORS
 import cv2
 import pytesseract
 from passporteye import read_mrz
 
-# Point pytesseract to the newly installed Tesseract executable
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+if platform.system() == 'Windows':
+    pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 app = Flask(__name__)
 # Enables safe cross-origin communication between your HTML file and the Python backend
@@ -98,7 +99,5 @@ def scan_endpoint():
             os.remove(temporary_save_path)
 
 if __name__ == '__main__':
-    print("--------------------------------------------------")
-    print("  Sri Lankan Passport Free OCR Engine Online Ready")
-    print("--------------------------------------------------")
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)
